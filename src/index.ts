@@ -5,12 +5,24 @@ import './config.js';
 import { promises as fs } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import cac from 'cac';
 import { generateProjectId } from './db/index.js';
 import { type ScanStats, scan } from './scanner/index.js';
 import { logger } from './utils/logger.js';
 
+// 读取 package.json 获取版本号
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const pkgPath = path.resolve(__dirname, '../package.json');
+const pkg = JSON.parse(await fs.readFile(pkgPath, 'utf-8'));
+
 const cli = cac('contextweaver');
+
+// 自定义版本输出，只显示版本号
+if (process.argv.includes('-v') || process.argv.includes('--version')) {
+  console.log(pkg.version);
+  process.exit(0);
+}
 
 cli.command('init', '初始化 ContextWeaver 配置').action(async () => {
   const configDir = path.join(os.homedir(), '.contextweaver');
@@ -91,16 +103,17 @@ cli
     const startTime = Date.now();
 
     try {
+      // 进度日志节流：只在 30%、60%、90% 时输出（100% 由扫描完成日志代替）
+      let lastLoggedPercent = 0;
       const stats: ScanStats = await scan(rootPath, {
         force: options.force,
         onProgress: (current, total, message) => {
           if (total !== undefined) {
-            const percent = ((current / total) * 100).toFixed(1);
-            logger.info({ current, total, percent: `${percent}%`, message }, '扫描进度');
-          } else if (message) {
-            logger.info({ current, message }, '扫描进度');
-          } else {
-            logger.info({ current }, '扫描进度');
+            const percent = Math.floor((current / total) * 100);
+            if (percent >= lastLoggedPercent + 30 && percent < 100) {
+              logger.info(`索引进度: ${percent}% - ${message || ''}`);
+              lastLoggedPercent = Math.floor(percent / 30) * 30;
+            }
           }
         },
       });
@@ -108,18 +121,13 @@ cli
       process.stdout.write('\n');
 
       const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-      logger.info('扫描完成！');
-      logger.info(`耗时: ${duration}s`);
-      logger.info(`文件总数: ${stats.totalFiles}`);
-      logger.info(`新增: ${stats.added}`);
-      logger.info(`修改: ${stats.modified}`);
-      logger.info(`未变: ${stats.unchanged}`);
-      logger.info(`删除: ${stats.deleted}`);
-      logger.info(`跳过: ${stats.skipped}`);
-      logger.info(`错误: ${stats.errors}`);
+      logger.info(`索引完成 (${duration}s)`);
+      logger.info(
+        `总数:${stats.totalFiles} 新增:${stats.added} 修改:${stats.modified} 未变:${stats.unchanged} 删除:${stats.deleted} 跳过:${stats.skipped} 错误:${stats.errors}`,
+      );
     } catch (err) {
       const error = err as { message?: string; stack?: string };
-      logger.error({ err, stack: error.stack }, `扫描失败: ${error.message}`);
+      logger.error({ err, stack: error.stack }, `索引失败: ${error.message}`);
       process.exit(1);
     }
   });

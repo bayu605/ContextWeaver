@@ -99,15 +99,10 @@ function createFormattedStream(filePath: string): Writable {
         // 提取额外的属性（排除 pino 内部字段）
         const { level: _l, time: _t, pid: _p, hostname: _h, name: _n, msg: _m, ...extra } = log;
 
-        // 如果有额外属性，将其格式化为 JSON
+        // 如果有额外属性，将其格式化为单行 JSON
         let line = `${time} [${level}] ${msg}`;
         if (Object.keys(extra).length > 0) {
-          // 美化输出：每个属性一行（便于查看）
-          const extraLines = JSON.stringify(extra, null, 2)
-            .split('\n')
-            .map((l, i) => (i === 0 ? l : `    ${l}`)) // 缩进
-            .join('\n');
-          line += `\n    ${extraLines}`;
+          line += ` ${JSON.stringify(extra)}`;
         }
 
         writeStream.write(`${line}\n`, callback);

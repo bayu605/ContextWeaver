@@ -96,7 +96,6 @@ export async function scan(rootPath: string, options: ScanOptions = {}): Promise
 
     // 如果强制重新索引，清空数据库和向量索引
     if (forceReindex) {
-      logger.info('强制重新索引...');
       clear(db);
 
       // 清空向量索引
