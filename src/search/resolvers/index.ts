@@ -7,8 +7,12 @@
  * - Go
  * - Java
  * - Rust
+ * - C/C++
+ * - C#
  */
 
+import { CppResolver } from './CppResolver.js';
+import { CSharpResolver } from './CSharpResolver.js';
 import { GoResolver } from './GoResolver.js';
 import { JavaResolver } from './JavaResolver.js';
 import { JsTsResolver } from './JsTsResolver.js';
@@ -28,5 +32,7 @@ export function createResolvers(): ImportResolver[] {
     new GoResolver(),
     new JavaResolver(),
     new RustResolver(),
+    new CppResolver(),
+    new CSharpResolver(),
   ];
 }

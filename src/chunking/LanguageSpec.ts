@@ -149,6 +149,80 @@ const LANGUAGE_SPECS: Record<string, LanguageSpecConfig> = {
     },
     commentTypes: new Set(['line_comment', 'block_comment']),
   },
+
+  c: {
+    hierarchy: new Set([
+      'function_definition',
+      'struct_specifier',
+      'union_specifier',
+      'enum_specifier',
+      'type_definition',
+    ]),
+    nameFields: ['declarator', 'name'],
+    nameNodeTypes: new Set(['identifier', 'type_identifier', 'field_identifier']),
+    prefixMap: {
+      function_definition: '',
+      struct_specifier: 'struct ',
+      union_specifier: 'union ',
+      enum_specifier: 'enum ',
+      type_definition: 'typedef ',
+    },
+    commentTypes: new Set(['comment']),
+  },
+
+  cpp: {
+    hierarchy: new Set([
+      'function_definition',
+      'class_specifier',
+      'struct_specifier',
+      'union_specifier',
+      'enum_specifier',
+      'namespace_definition',
+      'template_declaration',
+      'type_definition',
+    ]),
+    nameFields: ['declarator', 'name'],
+    nameNodeTypes: new Set(['identifier', 'type_identifier', 'field_identifier', 'namespace_identifier']),
+    prefixMap: {
+      function_definition: '',
+      class_specifier: 'class ',
+      struct_specifier: 'struct ',
+      union_specifier: 'union ',
+      enum_specifier: 'enum ',
+      namespace_definition: 'namespace ',
+      template_declaration: 'template ',
+      type_definition: 'typedef ',
+    },
+    commentTypes: new Set(['comment']),
+  },
+
+  c_sharp: {
+    hierarchy: new Set([
+      'class_declaration',
+      'interface_declaration',
+      'struct_declaration',
+      'enum_declaration',
+      'record_declaration',
+      'method_declaration',
+      'constructor_declaration',
+      'property_declaration',
+      'namespace_declaration',
+    ]),
+    nameFields: ['name', 'identifier'],
+    nameNodeTypes: new Set(['identifier']),
+    prefixMap: {
+      class_declaration: 'class ',
+      interface_declaration: 'interface ',
+      struct_declaration: 'struct ',
+      enum_declaration: 'enum ',
+      record_declaration: 'record ',
+      method_declaration: '',
+      constructor_declaration: '',
+      property_declaration: '',
+      namespace_declaration: 'namespace ',
+    },
+    commentTypes: new Set(['comment']),
+  },
 };
 
 /**
